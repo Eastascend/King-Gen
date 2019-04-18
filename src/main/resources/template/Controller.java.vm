@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ${package}.${moduleName}.entity.${className}Entity;
 import ${package}.${moduleName}.service.${className}Service;
-import ${mainPath}.common.utils.PageUtils;
-import ${mainPath}.common.utils.R;
+import ${mainPath}.core.common.utils.PageUtils;
+import ${mainPath}.core.common.utils.K;
 
 
 
@@ -22,7 +22,6 @@ import ${mainPath}.common.utils.R;
  * ${comments}
  *
  * @author ${author}
- * @email ${email}
  * @date ${datetime}
  */
 @RestController
@@ -36,10 +35,10 @@ public class ${className}Controller {
      */
     @RequestMapping("/list")
     @RequiresPermissions("${moduleName}:${pathName}:list")
-    public R list(@RequestParam Map<String, Object> params){
+    public K list(@RequestParam Map<String, Object> params){
         PageUtils page = ${classname}Service.queryPage(params);
 
-        return R.ok().put("page", page);
+        return K.ok().put("page", page);
     }
 
 
@@ -48,10 +47,10 @@ public class ${className}Controller {
      */
     @RequestMapping("/info/{${pk.attrname}}")
     @RequiresPermissions("${moduleName}:${pathName}:info")
-    public R info(@PathVariable("${pk.attrname}") ${pk.attrType} ${pk.attrname}){
+    public K info(@PathVariable("${pk.attrname}") ${pk.attrType} ${pk.attrname}){
 		${className}Entity ${classname} = ${classname}Service.getById(${pk.attrname});
 
-        return R.ok().put("${classname}", ${classname});
+        return K.ok().put("${classname}", ${classname});
     }
 
     /**
@@ -59,10 +58,10 @@ public class ${className}Controller {
      */
     @RequestMapping("/save")
     @RequiresPermissions("${moduleName}:${pathName}:save")
-    public R save(@RequestBody ${className}Entity ${classname}){
+    public K save(@RequestBody ${className}Entity ${classname}){
 		${classname}Service.save(${classname});
 
-        return R.ok();
+        return K.ok();
     }
 
     /**
@@ -70,10 +69,10 @@ public class ${className}Controller {
      */
     @RequestMapping("/update")
     @RequiresPermissions("${moduleName}:${pathName}:update")
-    public R update(@RequestBody ${className}Entity ${classname}){
+    public K update(@RequestBody ${className}Entity ${classname}){
 		${classname}Service.updateById(${classname});
 
-        return R.ok();
+        return K.ok();
     }
 
     /**
@@ -81,10 +80,10 @@ public class ${className}Controller {
      */
     @RequestMapping("/delete")
     @RequiresPermissions("${moduleName}:${pathName}:delete")
-    public R delete(@RequestBody ${pk.attrType}[] ${pk.attrname}s){
+    public K delete(@RequestBody ${pk.attrType}[] ${pk.attrname}s){
 		${classname}Service.removeByIds(Arrays.asList(${pk.attrname}s));
 
-        return R.ok();
+        return K.ok();
     }
 
 }
